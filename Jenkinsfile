@@ -39,17 +39,17 @@ pipeline {
 		}
 		stage('Build Docker Image') {
 			steps {
-                script {
+                /*script {
                     pom = readMavenPom file: pom.xml
-                }
+                }*/
 				sh "docker build -t ${APP_NAME}:latest ."
 			}
 		}
 		stage('Tag Docker Image') {
 			steps {
-				script { 
+				/*script { 
 					pom = readMavenPom file: 'pom.xml'
-				}
+				}*/
 				sh "docker tag weather-app:latest qui3tst0rm/${APP_NAME}:${APP_VERSION}"
 			}
 		}
