@@ -44,7 +44,7 @@ pipeline {
 				script { 
 					pom = readMavenPom file: 'pom.xml'
 				}
-				sh "docker tag addressbook:latest qui3tst0rm/addressbook:${pom.version}"
+				sh "docker tag weatherapp:latest qui3tst0rm/weatherapp:${pom.version}"
 			}
 		}
 		stage('Push Docker Image') {
