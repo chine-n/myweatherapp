@@ -14,6 +14,8 @@ pipeline {
                         sh '''
                         scp -o StrictHostKeyChecking=no -i ~/.ssh/kube-ssh-key/id_rsa *.ymal "$USERNAME"@54.170.14.41:~/
                         ssh -i ~/.ssh/kube-ssh-key/id_rsa "$USERNAME"@54.170.14.41 << EOF
+                        ls -la
+                        pwd
                         kubectl apply -f weather-app-deployment.yaml
                         kubectl apply -f weather-app-service.yaml
                         EOF
