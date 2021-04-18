@@ -12,7 +12,7 @@ pipeline {
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: 'la-cloud-user-ssh-login', keyFileVariable: 'KEY', usernameVariable: 'USERNAME', passphraseVariable: 'PASSPHRASE' )]) {
                         sh '''
-                        ssh -i /var/lib/jenkins/.ssh/id_rsa ${USERNAME}@54.170.14.41
+                        ssh -tt -i /var/lib/jenkins/.ssh/id_rsa ${USERNAME}@54.170.14.41
                         echo ${PASSPHRASE}
                         kubectl apply -f weather-app-deployment.yaml
                         kubectl apply -f weather-app-service.yaml
