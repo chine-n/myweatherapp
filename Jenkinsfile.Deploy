@@ -14,10 +14,9 @@ pipeline {
                     
                     script {
                         sh '''
-                        ssh -tt cloud_user@54.170.14.41 /bin/bash << EOF
+                        ssh -tt cloud_user@54.170.14.41 /bin/bash
                         kubectl apply -f weather-app-deployment.yaml
                         kubectl apply -f weather-app-service.yaml
-                        EOF
                         '''
                     }
                     // scp -o StrictHostKeyChecking=no -i ~/.ssh/terraform2.pem target/weather-app-0.0.1-SNAPSHOT.jar ec2-user@$BLUE_BOX_IP:/tmp
