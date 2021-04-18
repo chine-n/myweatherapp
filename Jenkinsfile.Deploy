@@ -3,20 +3,20 @@ pipeline {
  
  environment {
  APP_NAME = readMavenPom().getArtifactId()
-	APP_VERSION = readMavenPom().getVersion()
+ APP_VERSION = readMavenPom().getVersion()
  }
  
   stages { 
      stage('deploy') { 
         steps {
           sh '''
-          dir (scripts)
-          ./set_app_version.sh
           ssh cloud_user@63.32.52.76
           kubectl apply -f weather-app-deployment.yaml
           kubectl apply -f weather-app-service.yaml
           '''
-          //scp -o StrictHostKeyChecking=no -i ~/.ssh/terraform2.pem target/weather-app-0.0.1-SNAPSHOT.jar ec2-user@$BLUE_BOX_IP:/tmp
+          // scp -o StrictHostKeyChecking=no -i ~/.ssh/terraform2.pem target/weather-app-0.0.1-SNAPSHOT.jar ec2-user@$BLUE_BOX_IP:/tmp
+	  // dir (scripts) = command used to access content in a dir called script
+          // ./set_app_version.sh = shell script to update deployment.yaml file with app version number
         }
      }
    }
