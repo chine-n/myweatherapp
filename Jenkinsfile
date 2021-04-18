@@ -36,7 +36,7 @@ pipeline {
                 script {
                     pom = readMavenPom file: pom.xml
                 }
-				sh "docker build -t ${pom.name}:latest ."
+				sh "docker build -t ${pom.artifactId}:latest ."
 			}
 		}
 		stage('Tag Docker Image') {
@@ -44,7 +44,7 @@ pipeline {
 				script { 
 					pom = readMavenPom file: 'pom.xml'
 				}
-				sh "docker tag weatherapp:latest qui3tst0rm/weatherapp:${pom.version}"
+				sh "docker tag weather-app:latest qui3tst0rm/weather-app:${pom.version}"
 			}
 		}
 		stage('Push Docker Image') {
