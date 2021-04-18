@@ -3,6 +3,12 @@ pipeline {
 
 	tools {maven "mvn3.6.3"}
 	
+	environment {
+	APP_NAME = readMavenPom().getArtifactId()
+	APP_VERSION = readMavenPom().getVersion()
+		
+	}
+	
 	stages {
 		stage('Clean') {
 			steps {
@@ -36,7 +42,7 @@ pipeline {
                 script {
                     pom = readMavenPom file: pom.xml
                 }
-				sh "docker build -t weather-app:latest ."
+				sh "docker build -t ${APP_NAME}:latest ."
 			}
 		}
 		stage('Tag Docker Image') {
@@ -44,14 +50,16 @@ pipeline {
 				script { 
 					pom = readMavenPom file: 'pom.xml'
 				}
-				sh "docker tag weather-app:latest qui3tst0rm/weather-app:${pom.version}"
+				sh "docker tag weather-app:latest qui3tst0rm/${APP_NAME}:${APP_VERSION}"
 			}
 		}
 		stage('Push Docker Image') {
 			steps {
 				withCredentials([usernamePassword(credentialsId: 'DOCKER_CREDS', passwordVariable: 'DOCKER_HUB_PWD', usernameVariable: 'DOCKER_HUB_USER')]) {
-					sh 'docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PWD'
-					sh "docker push qui3tst0rm/addressbook:${pom.version}"
+					sh """
+					 docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PWD
+					 docker push qui3tst0rm/${APP_NAME}:${APP_VERSION}
+					"""
 				}
 			}
 		}
