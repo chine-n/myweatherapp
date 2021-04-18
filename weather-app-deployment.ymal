@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: weather-app-project
-        image: qui3tst0rm/weather-app:0.0.1-SNAPSHOT
+        image: qui3tst0rm/weather-app:1.0.0-SNAPSHOT 
         ports:
         - containerPort: 8080
