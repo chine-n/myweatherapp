@@ -13,7 +13,7 @@ pipeline {
                     withCredentials([sshUserPrivateKey(credentialsId: 'la-cloud-user-ssh-login', keyFileVariable: 'KEY', usernameVariable: 'USERNAME', passphraseVariable: 'PASSPHRASE' )]) {
                         sh '''
                         APP_VERSION=\$(cat pom.xml | grep version | head -2 | awk -F'[<>]' '/version/ {print $3}')
-                        sed -i "s/TEXT set_app_version/TEXT $APP_VERSION/" ../weather-app-deployment.yaml
+                        sed -i "s/TEXT set_app_version/TEXT $APP_VERSION/" /weather-app-deployment.yaml
                         scp -o StrictHostKeyChecking=no -i ~/.ssh/kube-ssh-key/id_rsa *.yaml "$USERNAME"@54.170.14.41:~/
                         ssh -i ~/.ssh/kube-ssh-key/id_rsa "$USERNAME"@3.250.97.72 << EOF
                         ls -la
