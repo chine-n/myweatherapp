@@ -12,7 +12,7 @@ pipeline {
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: 'la-cloud-user-ssh-login', keyFileVariable: 'KEY', usernameVariable: 'USERNAME', passphraseVariable: 'PASSPHRASE' )]) {
                         sh '''
-                        ssh -tt ${USERNAME}@54.170.14.41
+                        ssh ${USERNAME}@54.170.14.41
                         kubectl apply -f weather-app-deployment.yaml
                         kubectl apply -f weather-app-service.yaml
                         '''
