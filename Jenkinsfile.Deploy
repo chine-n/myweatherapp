@@ -3,8 +3,12 @@ pipeline {
   stages { 
      stage('deploy') { 
         steps {
-          sh 'kubectl apply -f weather-app-deployment.yaml'
-          sh 'kubectl apply -f weather-app-service.yaml'
+          sh '''
+          ssh cloud_user@63.32.52.76
+          kubectl apply -f weather-app-deployment.yaml
+          kubectl apply -f weather-app-service.yaml
+          '''
+          //scp -o StrictHostKeyChecking=no -i ~/.ssh/terraform2.pem target/weather-app-0.0.1-SNAPSHOT.jar ec2-user@$BLUE_BOX_IP:/tmp
         }
      }
    }
