@@ -15,7 +15,7 @@ pipeline {
 		ssh cloud_user@63.32.52.76 /bin/bash <<'EOT'
 		kubectl apply -f weather-app-deployment.yaml
 		kubectl apply -f weather-app-service.yaml
-		EOT
+		'EOT'
 		'''						
 		}
 		
