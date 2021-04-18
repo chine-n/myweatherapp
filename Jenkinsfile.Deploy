@@ -14,7 +14,7 @@ pipeline {
                     
                     script {
                         sh '''
-                        ssh -tt cloud_user@63.32.52.76 /bin/bash << EOF
+                        ssh -tt cloud_user@54.170.14.41 /bin/bash << EOF
                         kubectl apply -f weather-app-deployment.yaml
                         kubectl apply -f weather-app-service.yaml
                         EOF
