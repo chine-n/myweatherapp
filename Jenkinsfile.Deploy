@@ -1,9 +1,17 @@
 pipeline { 
- agent any 
+ agent any
+ 
+ environment {
+ APP_NAME = readMavenPom().getArtifactId()
+	APP_VERSION = readMavenPom().getVersion()
+ }
+ 
   stages { 
      stage('deploy') { 
         steps {
           sh '''
+          dir (scripts)
+          ./set_app_version.sh
           ssh cloud_user@63.32.52.76
           kubectl apply -f weather-app-deployment.yaml
           kubectl apply -f weather-app-service.yaml
