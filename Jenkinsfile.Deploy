@@ -11,14 +11,11 @@ pipeline {
         stage('deploy') {
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: 'la-cloud-user-ssh-login', keyFileVariable: 'KEY', usernameVariable: 'USERNAME', passphraseVariable: 'PASSPHRASE' )]) {
-                    
-                    script {
                         sh '''
                         ssh -tt ${USERNAME}@54.170.14.41
                         kubectl apply -f weather-app-deployment.yaml
                         kubectl apply -f weather-app-service.yaml
                         '''
-                    }
                     // scp -o StrictHostKeyChecking=no -i ~/.ssh/terraform2.pem target/weather-app-0.0.1-SNAPSHOT.jar ec2-user@$BLUE_BOX_IP:/tmp
                     // dir (scripts) = command used to access content in a dir called script
                     // ./set_app_version.sh = shell script to update deployment.yaml file with app version number
