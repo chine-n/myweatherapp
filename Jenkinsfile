@@ -57,7 +57,7 @@ pipeline {
 			steps {
 				withCredentials([usernamePassword(credentialsId: 'DOCKER_CREDS', passwordVariable: 'DOCKER_HUB_PWD', usernameVariable: 'DOCKER_HUB_USER')]) {
 					sh """
-					 docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PWD
+					 docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PWD}
 					 docker push qui3tst0rm/${APP_NAME}:${APP_VERSION}
 					"""
 				}
