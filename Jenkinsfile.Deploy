@@ -18,7 +18,7 @@ pipeline {
                         pwd
                         kubectl apply -f weather-app-deployment.yaml
                         kubectl apply -f weather-app-service.yaml
-                        EOF
+                        'EOF'
                         '''
                     }
             }
