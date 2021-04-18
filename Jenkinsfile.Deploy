@@ -8,7 +8,7 @@ pipeline {
 
     stages {
 
-        stage('deploy) {
+        stage('deploy') {
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: 'la-cloud-user-ssh-login', keyFileVariable: 'KEY', usernameVariable: 'USERNAME', passphraseVariable: 'PASSPHRASE' )]) {
                     
